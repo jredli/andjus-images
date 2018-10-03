@@ -45,6 +45,9 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/dropzone.js"></script>
+
     <!-- Animate.css -->
     <link href="{!! asset('css/animate.css') !!}" media="all" rel="stylesheet" type="text/css" />
     <!-- Icomoon Icon Fonts-->
@@ -75,7 +78,7 @@
         @endif
 
         @auth
-            <li class="active"><a href="{{ route('image_create') }}">Upload Images</a></li>
+            {{--<li class="active"><a href="{{ route('upload_images') }}">Upload Images</a></li>--}}
             <li class="active"><a href="{{ route('logout') }}">Logout</a></li>
         @endauth
     </ul>
@@ -102,20 +105,15 @@
 
         <div class="row">
 
-            <div id="fh5co-board" data-columns>
+            <h4 class="text-center">Drag your images bellow, mr. Andjus :)</h4>
 
-            @foreach($images as $image)
-                <!-- Image block -->
-                    <div class="item">
-                        <div class="animate-box">
-                            <a href="{{$image->path}}" class="image-popup fh5co-board-img" title="{{ $image->description }}"><img src="{{$image->path}}" alt="{{ $image->description }}"></a>
-                        </div>
-                    </div>
-                    <!-- Image block -->
-                @endforeach
+                <div class="col-lg-12">
+                    <form method="post" action="{{ route('image_store') }}" enctype="multipart/form-data"
+                          class="dropzone" id="dropzone">
+                        @csrf
+                    </form>
+                </div>
 
-
-            </div>
         </div>
     </div>
 </div>
@@ -138,11 +136,56 @@
     </div>
 </footer>
 
+<script type="text/javascript">
+    Dropzone.options.dropzone =
+        {
+            maxFilesize: 12,
+            renameFile: function(file) {
+                var dt = new Date();
+                var time = dt.getTime();
+                return time+file.name;
+            },
+            acceptedFiles: ".jpeg,.jpg,.png,.gif",
+            addRemoveLinks: true,
+            timeout: 50000,
+            removedfile: function(file)
+            {
+                var name = file.upload.filename;
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    },
+                    type: 'POST',
+                    url: '{{ route('image_destroy') }}',
+                    data: {filename: name},
+                    success: function (data){
+                        console.log("File has been successfully removed!!");
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }});
+                var fileRef;
+                return (fileRef = file.previewElement) != null ?
+                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
+            },
+
+            success: function(file, response)
+            {
+                console.log(response);
+            },
+            error: function(file, response)
+            {
+                return false;
+            }
+        };
+</script>
 
 <!-- jQuery -->
 <script src="{{ url('js/jquery.min.js') }}"></script>
 <!-- jQuery Easing -->
 <script src="{{ url('js/jquery.easing.1.3.js') }}"></script>
+<!-- jQuery Easing -->
+<script src="{{ url('js/upload_images.js') }}"></script>
 <!-- Bootstrap -->
 <script src="{{ url('js/bootstrap.min.js') }}"></script>
 <!-- Waypoints -->
@@ -153,7 +196,6 @@
 <script src="{{ url('js/salvattore.min.js') }}"></script>
 <!-- Main JS -->
 <script src="{{ url('js/main.js') }}"></script>
-
 
 
 

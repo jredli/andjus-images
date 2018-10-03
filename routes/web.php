@@ -14,3 +14,7 @@
 Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('image/upload','HomeController@fileCreate')->name('image_create');
+Route::post('image/upload/store','HomeController@fileStore')->name('image_store');
+Route::post('image/delete','HomeController@fileDestroy')->name('image_destroy');
