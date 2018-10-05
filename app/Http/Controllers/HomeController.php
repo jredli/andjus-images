@@ -44,4 +44,9 @@ class HomeController extends Controller
 		}
 		return $filename;
 	}
+
+	public function listImages() {
+		$images = Image::all();
+		return view('image_list', compact('images'));
+	}
 }
