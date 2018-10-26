@@ -7,27 +7,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hydrogen &mdash; A free HTML5 Template by FREEHTML5.CO</title>
+     <title>Andjusimages</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-    <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-    <meta name="author" content="FREEHTML5.CO" />
-
-    <!--
-      //////////////////////////////////////////////////////
-
-      FREE HTML5 TEMPLATE
-      DESIGNED & DEVELOPED by FREEHTML5.CO
-
-      Website: 		http://freehtml5.co/
-      Email: 			info@freehtml5.co
-      Twitter: 		http://twitter.com/fh5co
-      Facebook: 		https://www.facebook.com/fh5co
-
-      //////////////////////////////////////////////////////
-       -->
-
-    <!-- Facebook and Twitter integration -->
+    <meta name="description" content="Andjus images" />
+    <meta name="keywords" content="Andjus, images, istock" />
     <meta property="og:title" content=""/>
     <meta property="og:image" content=""/>
     <meta property="og:url" content=""/>
@@ -39,7 +22,7 @@
     <meta name="twitter:card" content="" />
 
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="{{ URL::asset('images/logo.png') }}">
 
     <!-- Google Webfonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
@@ -71,6 +54,7 @@
     <ul>
         <li class="active"><a href="{{ route('home') }}">Home</a></li>
         @if(Auth::guest())
+
             <li><a href="{{ route('login') }}">Sign in</a></li>
         @endif
 
@@ -79,12 +63,14 @@
             <li class="active"><a href="{{ route('image_list') }}">Images list</a></li>
             <li class="active"><a href="{{ route('logout') }}">Logout</a></li>
         @endauth
+        <li><a href="{{ route('email.form') }}">Contact</a></li>
     </ul>
     <h3 class="fh5co-lead">Connect with me</h3>
     <p class="fh5co-social-icons">
-        <a href="#"><i class="icon-facebook"></i></a>
-        <a href="#"><i class="icon-instagram"></i></a>
-        <a href="#"><i class="icon-camera"></i></a>
+        <a href="https://www.facebook.com/andjusimages/"><i class="icon-facebook"></i></a>
+        <a href="https://www.instagram.com/dandjus/?fbclid=IwAR1Vm3dl2HbFJJnHoQhTa_ve3XovrcXPriwF-Frcrha9uW7UOLwHbs--xDw"><i class="icon-instagram"></i></a>
+        <a href="http://www.istockphoto.com/portfolio/daniloandjus?excludenudity=true&sort=best#f7634b5
+"><i class="icon-camera"></i></a>
     </p>
 </div>
 <header id="fh5co-header" role="banner">
@@ -127,14 +113,12 @@
         <div class="row row-padded">
             <div class="col-md-12 text-center">
                 <p class="fh5co-social-icons">
-                    <a href="#"><i class="icon-twitter"></i></a>
-                    <a href="#"><i class="icon-facebook"></i></a>
-                    <a href="#"><i class="icon-instagram"></i></a>
-                    <a href="#"><i class="icon-dribbble"></i></a>
-                    <a href="#"><i class="icon-youtube"></i></a>
+                    <a href="http://www.istockphoto.com/portfolio/daniloandjus?excludenudity=true&sort=best#f7634b5
+"><i class="icon-camera"></i></a>
+                    <a href="https://www.facebook.com/andjusimages/"><i class="icon-facebook"></i></a>
+                    <a href="https://www.instagram.com/dandjus/?fbclid=IwAR1Vm3dl2HbFJJnHoQhTa_ve3XovrcXPriwF-Frcrha9uW7UOLwHbs--xDw"><i class="icon-instagram"></i></a>
                 </p>
-                <p><small>&copy; Hydrogen Free HTML5 Template. All Rights Reserved. <br>Designed by: <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> | Images by: <a href="http://pexels.com" target="_blank">Pexels</a> </small></p>
-            </div>
+                  </div>
         </div>
     </div>
 </footer>

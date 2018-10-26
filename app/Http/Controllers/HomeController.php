@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Image;
+use App\Mail\ContactEmail;
+use App\Mail\SendMailable;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Message;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -14,7 +18,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-    	$images = Image::all();
+	    $images = Image::orderBy('id', 'desc')->get();
         return view('home', compact('images'));
     }
 
@@ -46,7 +50,35 @@ class HomeController extends Controller
 	}
 
 	public function listImages() {
-		$images = Image::all();
-		return view('image_list', compact('images'));
+		$images = Image::orderBy('id', 'desc')->get();
+		return view('images_list', compact('images'));
 	}
+
+	public function deleteImage($id) {
+	    Image::where('id', $id)->delete();
+
+		return redirect()->route('image_list');
+	}
+
+	public function editImage($id)
+	{
+		$image = Image::find($id);
+		return view('image_edit', compact('image', 'id'));
+	}
+
+	public function updateImage(Request $request, $id)
+	{
+		$image= Image::find($id);
+		$image->id=$request->get('number');
+		$image->save();
+
+		return redirect()->route('image_list');
+	}
+
+	public function emailForm()
+	{
+		return view('contact');
+	}
+
+
 }

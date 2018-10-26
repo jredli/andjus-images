@@ -58,7 +58,6 @@
     <ul>
         <li class="active"><a href="{{ route('home') }}">Home</a></li>
         @if(Auth::guest())
-            {{--<li><a href="{{ route('contact') }}">Contact</a></li>--}}
             <li><a href="{{ route('login') }}">Sign in</a></li>
         @endif
 
@@ -93,14 +92,25 @@
 
         <div class="row">
 
-            <h4 class="text-center">Drag your images bellow, mr. Andjus :)</h4>
+            <form method="post" action="{{ action('HomeController@updateImage', $id) }}">
+                @csrf
+                <input name="_method" type="hidden" value="PATCH">
 
-                <div class="col-lg-12">
-                    <form method="post" action="{{ route('image_store') }}" enctype="multipart/form-data"
-                          class="dropzone" id="dropzone">
-                        @csrf
-                    </form>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="form-group col-md-4">
+                        <label for="number">Image ID:</label>
+                        <input type="text" class="form-control" name="number" value="{{ $id }}">
+                    </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="form-group col-md-4" style="margin-top:60px">
+                        <button type="submit" class="btn btn-success" style="margin-left:38px">Update</button>
+                    </div>
+                </div>
+            </form>
 
         </div>
     </div>

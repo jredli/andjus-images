@@ -58,7 +58,7 @@
     <ul>
         <li class="active"><a href="{{ route('home') }}">Home</a></li>
         @if(Auth::guest())
-            {{--<li><a href="{{ route('contact') }}">Contact</a></li>--}}
+
             <li><a href="{{ route('login') }}">Sign in</a></li>
         @endif
 
@@ -92,15 +92,29 @@
     <div class="container-fluid">
 
         <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+                <form action="{{ route('email.send') }}" method="post">
+                    {{--<div class="form-group">--}}
+                    {{--<label>Name</label>--}}
+                    {{--<input type="text" name="name" class="form-control">--}}
+                    {{--</div>--}}
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="msg" class="form-control"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    {{ csrf_field() }}
+                </form>
+            </div>
 
-            <h4 class="text-center">Drag your images bellow, mr. Andjus :)</h4>
-
-                <div class="col-lg-12">
-                    <form method="post" action="{{ route('image_store') }}" enctype="multipart/form-data"
-                          class="dropzone" id="dropzone">
-                        @csrf
-                    </form>
-                </div>
 
         </div>
     </div>
